@@ -1,0 +1,46 @@
+{% extends 'vyavasayamapp/base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+		<div class="container">
+			<div class="mt-5 mb-5">
+				<legend>Crop Detail</legend>
+				<table class="table table-hover text-center">
+				  <thead>
+				    <tr>
+				      <th scope="col">ID</th>	
+				      <th scope="col">Name</th>
+				      <th scope="col">Post-Harvest</th>
+				      <th scope="col">Market</th>
+				      <th scope="col">Risks</th>
+				      <th scope="col">Edit</th>
+				      <th scope="col">Delete</th>
+				    </tr>
+				  </thead>
+				  {% for i in data %}
+				  <tbody>
+				    <tr>
+				      <td>{{i.id}}</td>
+				      <td>{{i.crop_name}}</td>
+				      <td>{{i.crop_post_harvest}}</td>
+				      <td>{{i.crop_market}}</td>
+				      <td>{{i.crop_risks}}</td>
+				      <td>
+				      	<button type="button" class="btn btn-warning btn-sm" style="border-radius: 7px"><a href="{% url 'crop_edit' pk=i.id %}">Edit</a></button>
+				      </td>
+				      <td>
+				      	<button type="button" class="btn btn-warning btn-sm" style="border-radius: 7px"><a href="{% url 'crop_delete' pk=i.id %}">Delete</a></button>
+				      </td>
+
+				    </tr>
+				  </tbody>
+				  {% endfor %}
+				</table>
+			</div>
+		</div>
+{% else %}
+	<h1>This cannot be accessed Please <a href="{% url 'login' %}">Login</a> First</h1>
+{% endif %}
+{% endblock %}

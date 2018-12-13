@@ -1,0 +1,34 @@
+{% extends 'vyavasayamapp/base.html' %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+	<div class="container">
+		<div class="col-md-6 offset-md-3">
+			<form method="POST" action="{% url 'crop_calculator' %}">
+				{% csrf_token %}
+			  <div class="form-group">
+				<label class="col-form-label col-form-label-sm" for="email">1 Bag price
+				</label>
+			    <input type="text" pattern="^(\d){1,7}$" class="form-control" placeholder="Enter amount of 1 Bag" name="bag-price" >
+			  </div>
+			  <div class="form-group">
+			    <label class="col-form-label col-form-label-sm" for="email">No.of Bags per Acre
+				</label>
+			    <input type="text" pattern="^(\d){1,7}$" class="form-control" placeholder="Enter No.of Bags per Acre" name="noofbags">
+			  </div>
+			  <div class="form-group">
+			    <label class="col-form-label col-form-label-sm" for="email">No.of Acres
+				</label>
+			    <input type="text" pattern="^(\d){1,7}$" class="form-control" placeholder="Enter No.of Acres" name="noofacres">
+			  </div>
+
+
+			  <button type="submit" class="btn btn-secondary">Submit</button>
+			</form>
+		</div>
+	</div>
+{% else %}
+	<h1>This cannot be accessed Please <a href="{% url 'login' %}">Login</a> First</h1>
+{% endif %}
+{% endblock %}

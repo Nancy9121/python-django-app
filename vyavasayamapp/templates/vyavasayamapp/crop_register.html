@@ -1,0 +1,37 @@
+{% extends 'vyavasayamapp/base.html' %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+	<div class="container">
+		<div class="col-md-6 offset-md-3">
+			<form method="POST" action="{% url 'crop_register' %}">
+				{% csrf_token %}
+			  <div class="form-group">
+				<label class="col-form-label col-form-label-sm" for="email">Crop-Name
+				</label>
+			    <input type="text" class="form-control" placeholder="Enter Crop Name" name="cropname" >
+			  </div>
+			  <div class="form-group">
+			    <label class="col-form-label col-form-label-sm" for="email">Post-Harvest
+				</label>
+			    <input type="text" class="form-control" placeholder="Enter Harvest Details" name="harvest">
+			  </div>
+			  <div class="form-group">
+				<label class="col-form-label col-form-label-sm" for="email">Market
+				</label>
+			    <input type="text" pattern="^(\d){3,7}$" class="form-control" placeholder="Enter Market " name="market">
+			  </div>
+			  <div class="form-group">
+				<label class="col-form-label col-form-label-sm" for="email">Risks
+				</label>
+			    <input type="text" class="form-control" placeholder="Enter Risks" name="risks">
+			  </div>
+			  <button type="submit" class="btn btn-secondary">Submit</button>
+			</form>
+		</div>
+	</div>
+{% else %}
+	<h1>This cannot be accessed Please <a href="{% url 'login' %}">Login</a> First</h1>
+{% endif %}
+{% endblock %}

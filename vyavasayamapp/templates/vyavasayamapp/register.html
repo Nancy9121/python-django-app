@@ -1,0 +1,63 @@
+{% extends 'vyavasayamapp/base.html' %}
+
+{% block content %}
+
+<h1 class="text-center">Register</h1>
+<div class="col-md-6 offset-md-3">
+	<form method="POST" action="{% url 'register' %}">
+		{% csrf_token %}
+	  <div class="form-group">
+	  	<label class="col-form-label col-form-label-sm" for="email">Username
+		</label>
+	    <input type="text" class="form-control" placeholder="Enter Username" name="username" minlength="5" maxlength="20" required>
+	  </div>
+	  <div class="form-group">
+	  	<label class="col-form-label col-form-label-sm" for="email">Password
+		</label>
+	    <input type="password" class="form-control" placeholder="Enter Password" name="password" minlength="6" maxlength="12" required>
+	  </div>
+	  <div class="form-group">
+	  	<label class="col-form-label col-form-label-sm" for="email">Email
+		</label>
+	    <input type="email" class="form-control" placeholder="Enter Email" name="email" required>
+	  </div>
+	  <div class="form-group">
+	  	<label class="col-form-label col-form-label-sm" for="email">DOB
+		</label>
+	    <input type="date" class="form-control" placeholder="Enter DOB" name="dob" required>
+	  </div>
+	  <div class="form-group">
+	  	<label class="col-form-label col-form-label-sm" for="email">Salary
+		</label>
+	    <input type="text" pattern="^(\d){3,7}$" class="form-control" placeholder="Enter Salary" name="salary" required="required"/>
+	  </div>
+	  <div class="form-group">
+	  	<label class="col-form-label col-form-label-sm" for="email">Gender
+		</label>
+		<div class="radio">
+		  <label><input type="radio" name="optradio" value="Male">Male</label>
+		</div>
+		<div class="radio">
+		  <label><input type="radio" name="optradio" value="Female">Female</label>
+		</div>
+	  </div>
+	  {% if no_of_count < 1%}
+		  <div class="form-group">
+		  	<label class="col-form-label col-form-label-sm" for="email">Superuser
+			</label>
+			<div class="radio">
+			  <label><input type="radio" name="optradio1" value="Yes">Yes</label>
+			</div>
+			<div class="radio">
+			  <label><input type="radio" name="optradio1" value="No">No</label>
+			</div>
+		  </div>
+	  {% endif %}
+	  <button type="submit" class="btn btn-secondary">Submit</button>
+	</form>
+</div>
+
+
+{% endblock %}
+
+

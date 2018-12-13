@@ -1,0 +1,22 @@
+{% extends 'vyavasayamapp/base.html' %}
+
+{% block content %}
+
+<h2 class="text-center">Login</h2>
+<div class="col-md-6 offset-md-3">
+	<form method="POST">
+		{% csrf_token %}
+	  <div class="form-group">
+	  	<label class="col-form-label col-form-label-sm" for="email">Username
+		</label>
+	    <input type="text" class="form-control" placeholder="Enter Username" name="username" minlength="3" maxlength="20" required>
+	  </div>
+	  <div class="form-group">
+	  	<label class="col-form-label col-form-label-sm" for="email">Password
+		</label>
+	    <input type="password" class="form-control" placeholder="Enter Password" name="password" minlength="6" maxlength="12" required>
+	  </div>
+	  <button type="submit" class="btn btn-secondary">Submit</button><a class="text-center" href="{% url 'forgot_password' %}">Forgot password</a>
+	</form>
+</div>
+{% endblock %}

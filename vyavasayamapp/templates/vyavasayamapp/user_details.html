@@ -1,0 +1,71 @@
+{% extends 'vyavasayamapp/base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+		<div class="container">
+			<div class="mt-5 mb-5">
+				<legend>User Detail</legend>
+				<table class="table table-hover text-center">
+				  <thead>
+				    <tr>
+				      <th scope="col">ID</th>	
+				      <th scope="col">Username</th>
+				      <th scope="col">Email</th>
+				      <th scope="col">DOB</th>
+				      <th scope="col">Salary</th>
+				      <th scope="col">Gender</th>
+				      <th scope="col">Super-User</th>
+				      <th scope="col">Edit</th>
+				      <th scope="col">Delete</th>
+				    </tr>
+				  </thead>
+				  {% if user.is_authenticated %}
+				  	{% if user.is_superuser == True %}
+						{% for i in data %}
+						  <tbody>
+						    <tr>
+						      <td>{{i.id}}</td>
+						      <td>{{i.username}}</td>
+						      <td>{{i.email}}</td>
+						      <td>{{i.user_details.dob}}</td>
+						      <td>{{i.user_details.salary}}</td>
+						      <td>{{i.user_details.gender}}</td>
+						      <td>{{i.is_superuser}}</td>
+						      <td>
+						      	<button type="button" class="btn btn-warning btn-sm" style="border-radius: 7px"><a href="{% url 'user_edit' pk=i.id %}">Edit</a></button>
+						      </td>
+						      <td>
+						      	<button type="button" class="btn btn-warning btn-sm" style="border-radius: 7px"><a href="{% url 'user_delete' pk=i.id %}">Delete</a></button>
+						      </td>
+
+						    </tr>
+						  </tbody>
+						{% endfor %}
+					{% else %}
+						  <tbody>
+						    <tr>
+						      <td>{{user.id}}</td>
+						      <td>{{user.username}}</td>
+						      <td>{{user.email}}</td>
+						      <td>{{user.user_details.dob}}</td>
+						      <td>{{user.user_details.salary}}</td>
+						      <td>{{user.user_details.gender}}</td>
+						      <td>{{user.is_superuser}}</td>
+						      <td>
+						      	<button type="button" class="btn btn-warning btn-sm" style="border-radius: 7px"><a href="{% url 'user_edit' pk=user.id %}">Edit</a></button>
+						      </td>
+						      <td>
+						      	<button type="button" class="btn btn-warning btn-sm" style="border-radius: 7px"><a href="{% url 'user_delete' pk=user.id %}">Delete</a></button>
+						      </td>
+						    </tr>
+						  </tbody>
+					{% endif %}
+				  {% endif %}
+				</table>
+			</div>
+		</div>
+
+{% else %}
+	<h1>This cannot be accessed Please <a href="{% url 'login' %}">Login</a> First</h1>
+{% endif %}
+{% endblock %}
